@@ -15,6 +15,12 @@ public static class SkillReader
     /// </summary>
     private static readonly Regex FrontMatterRegex = new(@"^---\s*(.*?)\s*---\s*(.*)$", RegexOptions.Singleline | RegexOptions.Compiled);
     
+    /// <summary>
+    /// Loads and validates Skill from given path to SKILL.md file
+    /// </summary>
+    /// <param name="pathToFile">Path to SKILL.md file, name can be anything</param>
+    /// <returns></returns>
+    /// <exception cref="SkillFileException"></exception>
     public static async Task<Skill> FromFileAsync(string pathToFile)
     {
         var content = await File.ReadAllTextAsync(pathToFile);
@@ -22,7 +28,7 @@ public static class SkillReader
         var match = FrontMatterRegex.Match(content);
 
         if (!match.Success)
-            throw new InvalidOperationException("Missing or invalid YAML front matter.");
+            throw new SkillFileException("Missing or invalid YAML front matter.");
 
         var yaml = match.Groups[1].Value;
         var body = match.Groups[2].Value;
@@ -64,5 +70,25 @@ public static class SkillReader
             front.Compatibility?.Trim(),
             front.AllowedTools?.Trim()
         );
+    }
+
+    /// <summary>
+    /// Loads and validates multiple Skills from given path directory containing subdirectories of skills
+    /// Expects that in each subdirectory there is a file named "SKILL.md"
+    /// </summary>
+    /// <param name="pathToDirectory">Path to root directory of skills</param>
+    /// <returns></returns>
+    /// <exception cref="SkillFileException"></exception>
+    public static async Task<IEnumerable<Skill>> FromMultipleFilesAsync(string pathToDirectory)
+    {
+        var skills = new  List<Skill>();
+        var subdirectories = Directory.GetDirectories(pathToDirectory);
+        foreach (var subdirectory in subdirectories)
+        {
+            var skill = await FromFileAsync(Path.Combine(subdirectory, "SKILL.md"));
+            skills.Add(skill);
+        }
+        
+        return skills;
     }
 }
