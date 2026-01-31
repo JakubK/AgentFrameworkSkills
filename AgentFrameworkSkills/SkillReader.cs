@@ -56,13 +56,13 @@ public static class SkillReader
 
         return new Skill
         (
-            front.Name,
-            front.Description,
-            front.License,
+            front.Name.Trim(),
+            front.Description.Trim(),
+            body.Trim(),
+            front.License?.Trim(),
             front.Metadata,
-            front.Compatibility,
-            front.AllowedTools,
-            body
+            front.Compatibility?.Trim(),
+            front.AllowedTools?.Trim()
         );
     }
 }
