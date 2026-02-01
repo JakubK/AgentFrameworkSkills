@@ -1,5 +1,5 @@
 ﻿using AgentFrameworkSkills;
-using AgentFrameworkSkills.Models;
+using AgentFrameworkSkills.Extensions;
 using Microsoft.Agents.AI;
 using Microsoft.Extensions.AI;
 using OllamaSharp;
@@ -7,18 +7,13 @@ using OllamaSharp;
 var endpoint = "http://localhost:11434";
 var modelName = "qwen3:0.6b";
 
-var skill = new Skill("someName", "someDesc", "someContent");
+var skills = (await SkillReader.FromSkillsRootAsync("Skills")).ToList();
 
-var allSkills = new List<Skill>
-{
-    skill
-};
-
-var skillTools = new SkillTools(allSkills);
+var skillTools = new SkillTools(skills);
 var agent = new OllamaApiClient(new Uri(endpoint), modelName)
     .AsAIAgent(instructions: "You are a helpful assistant.", name: "Test", tools: [AIFunctionFactory.Create(skillTools.LoadSkill)])
     .AsBuilder()
-    .Use(SkillMiddleware.InformAboutSkillsFactory(allSkills), null)
+    .UseSkills(skills)
     .Build();
 
 // Invoke the agent and output the text result.

@@ -11,6 +11,7 @@ public class SkillReaderTests
 
         await Assert.That(skill.SkillFront.Name).IsEqualTo("some-skill");
         await Assert.That(skill.SkillFront.Description).IsEqualTo("A description of what this skill does and when to use it.");
+        await Assert.That(skill.Content).IsEqualTo("Content");
     }
     
     [Test]

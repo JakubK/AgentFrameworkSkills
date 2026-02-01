@@ -3,7 +3,7 @@ using AgentFrameworkSkills.Models;
 
 namespace AgentFrameworkSkills;
 
-public class SkillTools(IReadOnlyList<Skill> allSkills)
+public class SkillTools(IEnumerable<Skill> allSkills)
 {
     [Description("""
      Load the full content of a skill into the agent's context.

@@ -7,12 +7,19 @@ namespace AgentFrameworkSkills;
 
 public static class SkillMiddleware
 {
+    /// <summary>
+    /// Func generating middleware which will paste information about provided skills
+    /// In the System Prompt
+    /// </summary>
+    /// <param name="skills">List of skills</param>
+    /// <param name="customSkillPrompt">Own system prompt append text with info about skills</param>
+    /// <returns></returns>
     public static Func<IEnumerable<ChatMessage>,
         AgentSession?,
         AgentRunOptions?,
         AIAgent,
         CancellationToken,
-        Task<AgentResponse>> InformAboutSkillsFactory(IEnumerable<Skill> skills, Func<IEnumerable<Skill>, string>? customSkillPrompt = null)
+        Task<AgentResponse>> Apply(IEnumerable<Skill> skills, Func<IEnumerable<Skill>, string>? customSkillPrompt = null)
     {
         return async (messages, session, options, innerAgent, cancellationToken) =>
         {
