@@ -1,5 +1,5 @@
 <Solution>
   <Project Path="AgentFrameworkSkills.Sample/AgentFrameworkSkills.Sample.csproj" />
-  <Project Path="AgentFrameworkSkills.Tests/AgentFrameworkSkills.Tests.csproj" />
+  <Project Path="AgentFrameworkSkills.Tests\AgentFrameworkSkills.Tests.csproj" />
   <Project Path="AgentFrameworkSkills/AgentFrameworkSkills.csproj" />
 </Solution>

@@ -18,7 +18,7 @@ var skillTools = new SkillTools(allSkills);
 var agent = new OllamaApiClient(new Uri(endpoint), modelName)
     .AsAIAgent(instructions: "You are a helpful assistant.", name: "Test", tools: [AIFunctionFactory.Create(skillTools.LoadSkill)])
     .AsBuilder()
-    .Use(AgentSkillMiddleware.InformAboutSkillsFactory(allSkills), null)
+    .Use(SkillMiddleware.InformAboutSkillsFactory(allSkills), null)
     .Build();
 
 // Invoke the agent and output the text result.

@@ -14,7 +14,7 @@ public class SkillTools(IReadOnlyList<Skill> allSkills)
     """)]
     public string LoadSkill([Description("skillName: The name of the skill to load")] string skillName)
     {
-        var skill = allSkills.FirstOrDefault(x => x.Name == skillName);
+        var skill = allSkills.FirstOrDefault(x => x.SkillFront.Name == skillName);
         if (skill != null)
         {
             return $"""
@@ -23,7 +23,7 @@ public class SkillTools(IReadOnlyList<Skill> allSkills)
                 """;
         }
         
-        var availableSkills = string.Join(", ", allSkills.Select(x => x.Name));
+        var availableSkills = string.Join(", ", allSkills.Select(x => x.SkillFront.Name));
         return $"""
             Skill {skillName} was not found.
             Available skills:

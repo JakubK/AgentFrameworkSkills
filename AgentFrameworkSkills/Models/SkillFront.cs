@@ -1,10 +1,14 @@
 namespace AgentFrameworkSkills.Models;
 
-public record SkillFront(
-    string Name,
-    string Description,
-    string? License = null,
-    Dictionary<string, string>? Metadata = null,
-    string? Compatibility = null,
-    string? AllowedTools = null
-);
+public class SkillFront
+{
+    public string Name { get; set; }
+    public string Description { get; set; }
+    
+    public string? License { get; set; }
+    
+    public Dictionary<string, string>? Metadata { get; set; }
+    
+    public string? Compatiblity { get; set; }
+    public string? AllowedTools { get; set; }
+}

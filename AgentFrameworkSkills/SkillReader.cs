@@ -11,14 +11,14 @@ namespace AgentFrameworkSkills;
 public static class SkillReader
 {
     /// <summary>
-    /// Regex used for reading SKILL.md, allowing to extract the YAML metadata part and Markdown content part
+    /// Regex used for reading Skill file, allowing to extract the YAML metadata part and Markdown content part
     /// </summary>
     private static readonly Regex FrontMatterRegex = new(@"^---\s*(.*?)\s*---\s*(.*)$", RegexOptions.Singleline | RegexOptions.Compiled);
     
     /// <summary>
-    /// Loads and validates Skill from given path to SKILL.md file
+    /// Loads and validates Skill from given path to Skill file
     /// </summary>
-    /// <param name="pathToFile">Path to SKILL.md file, name can be anything</param>
+    /// <param name="pathToFile">Path to Skill file, name can be anything</param>
     /// <returns></returns>
     /// <exception cref="SkillFileException"></exception>
     public static async Task<Skill> FromFileAsync(string pathToFile)
@@ -39,7 +39,6 @@ public static class SkillReader
             .Build();
         
         var front = deserializer.Deserialize<SkillFront>(yaml);
-
         var frontValidator = new SkillFrontValidator();
         var validationResults = await frontValidator.ValidateAsync(front);
         
@@ -55,20 +54,15 @@ public static class SkillReader
             throw new SkillFileException(sb.ToString());
         }
 
-        if (Path.GetDirectoryName(pathToFile) != front.Name)
+        if (Path.GetFileName(Path.GetDirectoryName(pathToFile)) != front.Name)
         {
             throw new SkillFileException("Skill name should be equal to its parent directory name");
         }
 
         return new Skill
         (
-            front.Name.Trim(),
-            front.Description.Trim(),
-            body.Trim(),
-            front.License?.Trim(),
-            front.Metadata,
-            front.Compatibility?.Trim(),
-            front.AllowedTools?.Trim()
+            front,
+            body.Trim()
         );
     }
 
@@ -79,7 +73,7 @@ public static class SkillReader
     /// <param name="pathToDirectory">Path to root directory of skills</param>
     /// <returns></returns>
     /// <exception cref="SkillFileException"></exception>
-    public static async Task<IEnumerable<Skill>> FromMultipleFilesAsync(string pathToDirectory)
+    public static async Task<IEnumerable<Skill>> FromSkillsRootAsync(string pathToDirectory)
     {
         var skills = new  List<Skill>();
         var subdirectories = Directory.GetDirectories(pathToDirectory);

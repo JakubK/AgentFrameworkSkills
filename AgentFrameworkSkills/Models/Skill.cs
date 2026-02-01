@@ -1,11 +1,15 @@
 namespace AgentFrameworkSkills.Models;
 
 public record Skill(
-    string Name,
-    string Description,
-    string Content,
-    string? License = null,
-    Dictionary<string, string>? Metadata = null,
-    string? Compatibility = null,
-    string? AllowedTools = null
-);
+    SkillFront SkillFront,
+    string Content
+)
+{
+    public Skill(string name, string description, string content) : this(new SkillFront
+    {
+        Name = name,
+        Description = description,
+    }, content)
+    {
+    }
+}
