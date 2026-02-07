@@ -10,6 +10,7 @@ var modelName = "qwen3:0.6b";
 var skills = (await SkillReader.FromSkillsRootAsync("Skills")).ToList();
 
 var skillTools = new SkillTools(skills);
+
 var agent = new OllamaApiClient(new Uri(endpoint), modelName)
     .AsAIAgent(instructions: "You are a helpful assistant.", name: "Test", tools: [AIFunctionFactory.Create(skillTools.LoadSkill)])
     .AsBuilder()
