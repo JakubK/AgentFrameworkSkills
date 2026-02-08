@@ -1,3 +1,3 @@
 namespace AgentFrameworkSkills.Models;
 
-public record Skill(SkillFront SkillFront, string Content);
+public record Skill(SkillFront SkillFront, string Content, string? Directory = null);

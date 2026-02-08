@@ -36,7 +36,7 @@ public static class SkillMiddleware
                 sb.AppendLine("## Available Skills:");
                 foreach (var skill in skills)
                 {
-                    sb.AppendLine($"- **{skill.SkillFront.Name}**: {skill.SkillFront.Description}");
+                    sb.AppendLine($"- **{skill.SkillFront.Name}**: {skill.SkillFront.Description} {skill.Directory}");
                 }
 
                 sb.AppendLine("Use the loadSkill tool when you need detailed information");
@@ -44,18 +44,11 @@ public static class SkillMiddleware
                 skillPrompt = sb.ToString();
             }
 
-            // Find the existing system message (if any)
-            var sysIndex = messageList.FindIndex(m => m.Role == ChatRole.System);
-
-            if (sysIndex >= 0)
+            // Drop the skills prompt only when it was not found
+            var skillPromptUsed = messageList.Any(m => m.Text == skillPrompt);
+            if (!skillPromptUsed)
             {
-                var existing = messageList[sysIndex].Text;
-                var updated = existing + "\n\n" + skillPrompt;
-                messageList[sysIndex] = new ChatMessage(ChatRole.System, updated);
-            }
-            else
-            {
-                messageList.Insert(0, new ChatMessage(ChatRole.System, skillPrompt));
+                messageList.Insert(0, new ChatMessage(ChatRole.User, skillPrompt));
             }
 
             return await innerAgent.RunAsync(

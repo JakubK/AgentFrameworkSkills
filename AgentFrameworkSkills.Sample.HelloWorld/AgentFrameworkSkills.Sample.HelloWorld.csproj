@@ -5,6 +5,7 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>AgentFrameworkSkills.Sample</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,12 +13,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Agents.AI" Version="1.0.0-preview.260128.1" />
-        <PackageReference Include="OllamaSharp" Version="5.4.11" />
+        <PackageReference Include="Microsoft.Agents.AI" Version="1.0.0-preview.260205.1" />
+        <PackageReference Include="OllamaSharp" Version="5.4.16" />
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="TestData\**\*">
+        <Content Include="Skills\**\*">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>

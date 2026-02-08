@@ -2,12 +2,12 @@ using AgentFrameworkSkills.Exceptions;
 
 namespace AgentFrameworkSkills.Tests;
 
-public class SkillReaderTests
+public class SkillFactoryTests
 {
     [Test]
     public async Task FromFileAsync_WhenValidSkill_LoadsAllData()
     {
-        var skill = await SkillReader.FromFileAsync("TestData/some-skill/SKILL.md");
+        var skill = await SkillFactory.FromFileAsync("TestData/some-skill/SKILL.md");
 
         await Assert.That(skill.SkillFront.Name).IsEqualTo("some-skill");
         await Assert.That(skill.SkillFront.Description).IsEqualTo("A description of what this skill does and when to use it.");
@@ -19,7 +19,7 @@ public class SkillReaderTests
     {
         await Assert.ThrowsAsync<SkillFileException>(async () =>
         {
-            await SkillReader.FromFileAsync("TestData/some-skill/SKILL2.md");
+            await SkillFactory.FromFileAsync("TestData/some-skill/SKILL2.md");
         });
     }
 }
