@@ -1,0 +1,23 @@
+name: Publish AgentFrameworkSkills to NuGet
+
+on: [workflow_dispatch]
+
+jobs:
+  build-test-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install .NET 10.0.x
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Run Tests
+        run: dotnet test AgentFrameworkSkills.Tests/AgentFrameworkSkills.Tests.csproj
+
+      - name: Publish to NuGet
+        run: |
+          find . -name '*.nupkg' -exec dotnet nuget push "{}" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate \;

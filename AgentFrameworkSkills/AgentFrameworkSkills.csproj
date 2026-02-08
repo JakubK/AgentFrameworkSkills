@@ -4,7 +4,24 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <VersionPrefix>0.0.1</VersionPrefix>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>AgentFrameworkSkills</PackageId>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/JakubK/AgentFrameworkSkills</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/JakubK/AgentFrameworkSkills</RepositoryUrl>
+        <Authors>JakubK</Authors>
+        <RepositoryType>git</RepositoryType>
+        <Description>Utilities for enabling Agent Skills in MS Agent Framework</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="FluentValidation" Version="12.1.1" />
