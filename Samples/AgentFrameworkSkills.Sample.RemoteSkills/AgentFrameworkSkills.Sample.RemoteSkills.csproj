@@ -5,12 +5,7 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>AgentFrameworkSkills.Sample</RootNamespace>
     </PropertyGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\AgentFrameworkSkills\AgentFrameworkSkills.csproj" />
-    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Agents.AI" Version="1.0.0-preview.260205.1" />
@@ -21,6 +16,10 @@
         <Content Include="Skills\**\*">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\AgentFrameworkSkills\AgentFrameworkSkills.csproj" />
     </ItemGroup>
 
 </Project>

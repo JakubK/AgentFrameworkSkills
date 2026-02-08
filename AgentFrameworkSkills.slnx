@@ -1,7 +1,7 @@
 <Solution>
   <Folder Name="/AgentFrameworkSkills.Samples/">
-    <Project Path="AgentFrameworkSkills.Sample.HelloWorld\AgentFrameworkSkills.Sample.HelloWorld.csproj" />
-    <Project Path="AgentFrameworkSkills.Sample.RemoteSkills/AgentFrameworkSkills.Sample.RemoteSkills.csproj" />
+    <Project Path="Samples/AgentFrameworkSkills.Sample.HelloWorld\AgentFrameworkSkills.Sample.HelloWorld.csproj" />
+    <Project Path="Samples/AgentFrameworkSkills.Sample.RemoteSkills/AgentFrameworkSkills.Sample.RemoteSkills.csproj" />
   </Folder>
   <Project Path="AgentFrameworkSkills.Tests/AgentFrameworkSkills.Tests.csproj" />
   <Project Path="AgentFrameworkSkills/AgentFrameworkSkills.csproj" />
