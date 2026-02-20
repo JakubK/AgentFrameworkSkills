@@ -16,7 +16,7 @@ jobs:
           dotnet-version: 10.0.x
 
       - name: Run Tests
-        run: dotnet test AgentFrameworkSkills.Tests/AgentFrameworkSkills.Tests.csproj
+        run: dotnet test --project AgentFrameworkSkills.Tests/AgentFrameworkSkills.Tests.csproj
 
       - name: Publish to NuGet
         run: |
